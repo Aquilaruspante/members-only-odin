@@ -23,6 +23,20 @@ const SQL = `
         VALUES
             ('John', 'Doe', 'JohnnyD', '${hashOne}', '${saltOne}'),
             ('Joao', 'Pereira', 'Jper', '${hashTwo}', '${hashTwo}');
+
+
+    CREATE TABLE IF NOT EXISTS messages (
+        id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        body VARCHAR (255) NOT NULL,
+        date VARCHAR (255),
+        user_id INT NOT NULL UNIQUE,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+
+    INSERT INTO messages (body, date, user_id)
+        VALUES
+            ('Hi guys', '${new Date(Date.now()).toString()}', 1),
+            ('We are the inner circle', '${new Date(Date.now()).toString()}', 2);
 `;
 
 async function main() {
