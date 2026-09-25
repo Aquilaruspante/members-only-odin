@@ -1,8 +1,12 @@
+const path = require('node:path');
 const express = require('express');
 const env = process.env;
 const messageRouter = require('./routes/messageRoutes');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res, next) => {
     res.redirect('/messages');

@@ -1,0 +1,12 @@
+<%- include('./templates/header.ejs') %>
+
+<main>
+    <% for (const message of messages) { %>
+        <div class="message-card">
+            <p><%= message.body %></p>
+            <p><%= message.date %></p>
+        </div>
+    <% } %>
+</main>
+
+<%- include('./templates/footer.ejs') %>
