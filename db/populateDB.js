@@ -1,7 +1,9 @@
 const pg = require('pg');
 const crypto = require('node:crypto');
 
-const saltOne = crypto.randombytes(32).toString('hex');
+console.log(process.env.PASSWORD_TWO, typeof process.env.PASSWORD_TWO);
+
+const saltOne = crypto.randomBytes(32).toString('hex');
 const hashOne = crypto.pbkdf2Sync(process.env.PASSWORD_ONE, saltOne, 10000, 64, 'sha512').toString('hex');
 
 const saltTwo = crypto.randomBytes(32).toString('hex');
@@ -14,13 +16,13 @@ const SQL = `
         lastname VARCHAR (255) NOT NULL,
         username VARCHAR (255) NOT NULL UNIQUE,
         hashedpassword VARCHAR (255) NOT NULL,
-        salt VARCHAR (255) NOT NULL, 
+        salt VARCHAR (255) NOT NULL
     );
 
     INSERT INTO users (firstname, lastname, username, hashedpassword, salt)
         VALUES
-            ('John', 'Doe', 'JohnnyD', ${hashOne}, ${saltOne}),
-            ('Joao', 'Pereira', 'Jper', ${hashTwo}, ${hashTwo});
+            ('John', 'Doe', 'JohnnyD', '${hashOne}', '${saltOne}'),
+            ('Joao', 'Pereira', 'Jper', '${hashTwo}', '${hashTwo}');
 `;
 
 async function main() {
