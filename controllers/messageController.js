@@ -6,10 +6,8 @@ exports.getAllMessages = async function getAllMessages(req, res, next) {
 
     const flash = req.session.flash;
     delete req.session.flash;
-    
-    let username;
-    console.log(req.user);
-    if (req.user) username = req.user.username;
 
-    res.render('home', { messages, flash, username });
+    let user;
+    if (req.user) user = req.user;
+    res.render('home', { messages, flash, user });
 };

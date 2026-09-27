@@ -6,4 +6,12 @@
     <title>Only Members Message Board</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Inner Circle</h1>
+        <% if (locals.user) { %>
+            <a href="/logout">Logout</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+            <a href="/register">Sign up</a>
+        <% } %>
+    </header>

@@ -7,6 +7,7 @@ const env = process.env;
 const pgPool = require('./db/pool');
 const messageRouter = require('./routes/messageRoutes');
 const userRouter = require('./routes/userRoutes');
+const { isNotAuth } = require('./middleware');
 
 const app = express();
 
@@ -40,7 +41,14 @@ app.get('/', (req, res, next) => {
 });
 
 app.use('/messages', messageRouter);
-app.use('/register', userRouter);
+app.use('/register', isNotAuth, userRouter);
+
+app.get('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) return next(err);
+        res.redirect('/messages');
+    });
+});
 
 const port = env.PORT || 3000;
 app.listen(port || 3000, (err) => {
