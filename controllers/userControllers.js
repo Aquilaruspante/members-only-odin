@@ -8,13 +8,18 @@ exports.userCreate = async function userCreate(req, res, next) {
         const { salt, genHash } = genPassword(password);
 
         await db.userCreate(firstname, lastname, username, genHash, salt);
+        const user = await db.userGetByUsername(username);
+        req.login(user, (err) => {
+            if (err) return next(err);
+            return res.redirect('/messages');
+        });
         req.session.flash = { type: 'success', message: 'User created succesfully!'};
     } catch (err) {
+        console.log(err);
         req.session.flash = { type: 'error', message: 'Oops! Something went wrong!'};
-    };
-    req.session.save((err) => {
+        req.session.save((err) => {
         if (err) return next(err);
         res.redirect('/messages');
     });
-    
+    };  
 };

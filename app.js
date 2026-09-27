@@ -2,6 +2,7 @@ const path = require('node:path');
 const express = require('express');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
+const passport = require('passport');
 const env = process.env;
 const pgPool = require('./db/pool');
 const messageRouter = require('./routes/messageRoutes');
@@ -25,6 +26,9 @@ app.use(session({
         httpOnly: true,
     }
 }));
+
+require('./config/passport');
+app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
 

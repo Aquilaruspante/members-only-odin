@@ -1,6 +1,9 @@
 <%- include('./templates/header.ejs') %>
 
 <main>
+    <% if (username) { %>
+        <p><%= username %></p>
+    <% } %>
     <% if (flash) { %>
         <p class=`${flash.type}`><%= flash.message %></p>
     <% } %>
