@@ -1,6 +1,9 @@
 <%- include('./templates/header.ejs') %>
 
 <main>
+    <% if (flash) { %>
+        <p class=`${flash.type}`><%= flash.message %></p>
+    <% } %>
     <% for (const message of messages) { %>
         <div class="message-card">
             <p><%= message.body %></p>
