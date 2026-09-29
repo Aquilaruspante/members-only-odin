@@ -30,7 +30,7 @@ const SQL = `
         id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         body VARCHAR (255) NOT NULL,
         date VARCHAR (255),
-        user_id INT NOT NULL UNIQUE,
+        user_id INT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)
     );
 

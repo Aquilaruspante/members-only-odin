@@ -7,7 +7,7 @@
     <% for (const message of messages) { %>
         <div class="message-card">
             <% if (user) { %>
-                <h2 class="card-owner card-section">From <%= user.username %>:</h2>
+                <h2 class="card-owner card-section">From <%= message.user.username %>:</h2>
             <% } else { %>
                 <h2 class="card-owner card-section">From <span class="error">CLASSIFIED:</span></h2>
             <% } %>

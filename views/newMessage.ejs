@@ -1,0 +1,8 @@
+<%- include('./templates/header.ejs') %>
+
+<form action="/messages/new" method="POST">
+    <textarea name="body" placeholder="Write your message here..."></textarea>
+    <button>Submit</button>
+</form>
+
+<%- include('./templates/footer.ejs') %>

@@ -2,15 +2,34 @@ const db = require('../db/queries');
 
 exports.getAllMessages = async function getAllMessages(req, res, next) {
     const messages = await db.getAllMessages();
-
-    const flash = req.session.flash;
-    delete req.session.flash;
+    for (const message of messages) {
+        const user = await db.userGetById(message.user_id);
+        message.user = user;
+    };
 
     const user = req.user;
     
     const sessionMessages = req.session.messages;
-    console.log('messages', sessionMessages);
+
     delete req.session.messages;
 
-    res.render('home', { messages, flash, user, sessionMessages });
+    res.render('home', { messages, user, sessionMessages });
+};
+
+exports.messageCreateGet = function messageCreateGet(req, res, next) {
+    const user = req.user;
+    res.render('newMessage', { user });
+};
+
+exports.messageCreatePost = async function messageCreatePost(req, res, next) {
+    const { body } = req.body;
+    const userId = req.user.id;
+
+    await db.messageCreatePost(body, userId);
+
+    req.session.messages = { type: 'success', message: 'Post created succesfully!' };
+    req.session.save(err => {
+        if (err) return next(err);
+        res.redirect('/messages');
+    });
 };

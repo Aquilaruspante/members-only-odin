@@ -8,6 +8,14 @@ exports.getAllMessages = async function getAllMessages() {
     return rows;
 };
 
+exports.messageCreatePost = async function messageCreatePost(body, userId) {
+    await pool.query(`
+        INSERT INTO messages (body, date, user_id)
+            VALUES
+                ($1, $2, $3);
+    `, [body, new Date(Date.now()).toString(), userId]);
+};
+
 /*-------------------------- Users ------------------------------*/
 
 exports.userCreate = async function userCreate(firstName, lastName, username, hash, salt) {

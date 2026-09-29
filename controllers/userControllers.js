@@ -28,7 +28,7 @@ exports.userCreate = async function userCreate(req, res, next) {
         req.session.messages = { type: 'error', message: 'Oops! Something went wrong!'};
         req.session.save((err) => {
             if (err) return next(err);
-            res.redirect('/messages');
+            res.redirect('/user/register');
         });
     };  
 };
