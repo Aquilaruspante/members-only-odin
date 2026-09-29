@@ -1,0 +1,19 @@
+<%- include('./templates/header.ejs') %>
+
+<% if (sessionMessages) { %>
+    <p class="<%= sessionMessages.type %>"><%= sessionMessages.message %></p>
+<% } %>
+<form action="/user/login" method="POST">
+    <div class="form-element">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-element">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <button>Login</button>
+</form>
+<a href="/messages">Back</a>
+
+<%- include('./templates/footer.ejs') %>

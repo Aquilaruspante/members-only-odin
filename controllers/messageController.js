@@ -1,4 +1,3 @@
-const session = require('express-session');
 const db = require('../db/queries');
 
 exports.getAllMessages = async function getAllMessages(req, res, next) {
@@ -7,7 +6,11 @@ exports.getAllMessages = async function getAllMessages(req, res, next) {
     const flash = req.session.flash;
     delete req.session.flash;
 
-    let user;
-    if (req.user) user = req.user;
-    res.render('home', { messages, flash, user });
+    const user = req.user;
+    
+    const sessionMessages = req.session.messages;
+    console.log('messages', sessionMessages);
+    delete req.session.messages;
+
+    res.render('home', { messages, flash, user, sessionMessages });
 };

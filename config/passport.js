@@ -8,7 +8,9 @@ passport.use(new Strategy(async (username, password, done) => {
         const user = await db.userGetByUsername(username);
         if (!user) return done(null, false);
 
-        if (!verifyPassword(password)) return done(null, false);
+        const salt = user.salt;
+        const hash = user.hashedpassword;
+        if (!verifyPassword(password, salt, hash)) return done(null, false);
 
         return done(null, user);
     } catch (err) {

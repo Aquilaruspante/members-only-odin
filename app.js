@@ -7,9 +7,10 @@ const env = process.env;
 const pgPool = require('./db/pool');
 const messageRouter = require('./routes/messageRoutes');
 const userRouter = require('./routes/userRoutes');
-const { isNotAuth } = require('./middleware');
 
 const app = express();
+
+/*---------------------------------- Session config ---------------------------*/
 
 app.use(session({
     store: new pgSession({
@@ -31,24 +32,25 @@ app.use(session({
 require('./config/passport');
 app.use(passport.session());
 
+/*------------------------------- General middleware ---------------------------*/
+
 app.use(express.urlencoded({ extended: true }));
+
+/*------------------------------- View Engine settings --------------------------*/
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+/*-------------------------------- Routes --------------------------------------*/
 
 app.get('/', (req, res, next) => {
     res.redirect('/messages');
 });
 
 app.use('/messages', messageRouter);
-app.use('/register', isNotAuth, userRouter);
+app.use('/user', userRouter);
 
-app.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) return next(err);
-        res.redirect('/messages');
-    });
-});
+/*------------------------------ Start Server -----------------------------------*/
 
 const port = env.PORT || 3000;
 app.listen(port || 3000, (err) => {

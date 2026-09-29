@@ -7,6 +7,9 @@
     <% if (flash) { %>
         <p class=`${flash.type}`><%= flash.message %></p>
     <% } %>
+    <% if (sessionMessages) { %>
+        <p class="<%= sessionMessages.type %>"><%= sessionMessages.message %></p>
+    <% } %>
     <% for (const message of messages) { %>
         <div class="message-card">
             <p><%= message.body %></p>

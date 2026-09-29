@@ -1,7 +1,10 @@
 <%- include('./templates/header.ejs') %>
 
+<% if (sessionMessages) { %>
+    <p class="<%= sessionMessages.type %>"><%= sessionMessages.message %></p>
+<% } %>
 <main>
-    <form action="/register" method="POST">
+    <form action="/user/register" method="POST">
         <div class="form-element">
             <label for="firstname">First Name</label>
             <input type="text" id="firstname" name="firstname">
