@@ -1,7 +1,7 @@
 <%- include('./templates/header.ejs') %>
 
 <% if (sessionMessages) { %>
-    <p class="<%= sessionMessages.type %>"><%= sessionMessages.message %></p>
+    <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
 <% } %>
 <form action="/user/login" method="POST">
     <div class="form-element">

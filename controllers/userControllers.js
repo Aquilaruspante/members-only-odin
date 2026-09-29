@@ -51,7 +51,6 @@ exports.userLoginPost = function userLoginPost (req, res, next) {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
         if (!user) {
-            console.log(' no user');
             try {
                 req.session.messages = { type: 'error', message: 'Wrong credentials!' };
                 req.session.save(err => {

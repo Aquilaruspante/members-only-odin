@@ -19,7 +19,7 @@ passport.use(new Strategy(async (username, password, done) => {
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    if (user) done(null, user.id);
 });
 
 passport.deserializeUser(async (user_id, done) => {

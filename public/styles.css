@@ -1,0 +1,157 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*------------------------------------------------ My Code -----------------------------------------------------*/
+
+html {
+    --primary-color: rgb(88, 88, 124);
+    --text-color: rgb(216, 216, 231);
+    --text-color-light: rgb(255, 255, 255);
+    --secondary-color: rgb(221, 211, 193);
+    --text-color-dark: rgb(1, 1, 24);
+}
+
+.error {
+    background-color: rgb(226, 192, 192);
+    color: red;
+}
+
+.success {
+    background-color: rgb(192, 216, 192);
+    color: green;
+}
+
+.flash-message {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    padding: 3px;
+    top: 20px;
+    border-radius: 2px;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 100vh;
+}
+
+.header-container {
+    background-color: var(--primary-color);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    max-width: 1700px;
+    margin: auto;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h1 a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+nav {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+nav a:hover {
+    color: var(--text-color-light);
+    transition: 0.3s;
+}
+
+.user-nav {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 550;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+main {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 1700px;
+    margin: auto;
+    padding: 50px 0;
+    color: var(--text-color-dark);
+    height: calc(100% - 50px);
+}
+
+.message-card {
+    max-width: 600px;
+    margin: auto;
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: var(--secondary-color);
+}
+
+.card-section {
+    margin-bottom: 10px;
+}

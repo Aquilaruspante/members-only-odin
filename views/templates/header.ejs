@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Only Members Message Board</title>
 </head>
 <body>
-    <header>
-        <h1>Inner Circle</h1>
-        <% if (locals.user) { %>
-            <a href="/user/logout">Logout</a>
-        <% } else { %>
-            <a href="/user/login">Login</a>
-            <a href="/user/register">Sign up</a>
-        <% } %>
-    </header>
+    <div class="header-container">
+        <header class="page-header">
+            <h1><a href="/messages">Inner Circle</a></h1>
+            <nav>
+                <% if (locals.user) { %>
+                    <a href="/user/logout">Logout</a>
+                    <p class="user-nav"><%= user.username %></p>
+                <% } else { %>
+                    <a href="/user/login">Login</a>
+                    <a href="/user/register">Sign up</a>
+                <% } %>
+            </nav>
+        </header>
+    </div>
+<main>
+    

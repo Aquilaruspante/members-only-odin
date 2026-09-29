@@ -1,21 +1,19 @@
 <%- include('./templates/header.ejs') %>
 
-<main>
-    <% if (user) { %>
-        <p><%= user.username %></p>
-    <% } %>
-    <% if (flash) { %>
-        <p class=`${flash.type}`><%= flash.message %></p>
-    <% } %>
+
     <% if (sessionMessages) { %>
-        <p class="<%= sessionMessages.type %>"><%= sessionMessages.message %></p>
+        <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
     <% } %>
     <% for (const message of messages) { %>
         <div class="message-card">
-            <p><%= message.body %></p>
-            <p><%= message.date %></p>
+            <% if (user) { %>
+                <h2 class="card-owner card-section">From <%= user.username %>:</h2>
+            <% } else { %>
+                <h2 class="card-owner card-section">From <span class="error">CLASSIFIED:</span></h2>
+            <% } %>
+            <p class="card-body card-section"><%= message.body %></p>
+            <h3 class="card-footer"><%= message.date %></h3>
         </div>
     <% } %>
-</main>
 
 <%- include('./templates/footer.ejs') %>

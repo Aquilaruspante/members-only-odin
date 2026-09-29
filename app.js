@@ -35,6 +35,7 @@ app.use(passport.session());
 /*------------------------------- General middleware ---------------------------*/
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 /*------------------------------- View Engine settings --------------------------*/
 
