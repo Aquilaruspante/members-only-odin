@@ -7,6 +7,9 @@ const hashOne = crypto.pbkdf2Sync(process.env.PASSWORD_ONE, saltOne, 10000, 64, 
 const saltTwo = crypto.randomBytes(32).toString('hex');
 const hashTwo = crypto.pbkdf2Sync(process.env.PASSWORD_TWO, saltTwo, 10000, 64, 'sha512').toString('hex');
 
+const saltThree = crypto.randomBytes(32).toString('hex');
+const hashThree = crypto.pbkdf2Sync(process.env.PASSWORD_THREE, saltThree, 10000, 64, 'sha512').toString('hex');
+
 const SQL = `
     DROP TABLE messages;
     DROP TABLE users;
@@ -17,13 +20,16 @@ const SQL = `
         lastname VARCHAR (255) NOT NULL CHECK (TRIM(lastname) <> ''),
         username VARCHAR (255) NOT NULL UNIQUE CHECK (TRIM(username) <> ''),
         hashedpassword VARCHAR (255) NOT NULL,
-        salt VARCHAR (255) NOT NULL
+        salt VARCHAR (255) NOT NULL,
+        isAdmin BOOLEAN NOT NULL,
+        member BOOLEAN NOT NULL
     );
 
-    INSERT INTO users (firstname, lastname, username, hashedpassword, salt)
+    INSERT INTO users (firstname, lastname, username, hashedpassword, salt, isAdmin, member)
         VALUES
-            ('John', 'Doe', 'JohnnyD', '${hashOne}', '${saltOne}'),
-            ('Joao', 'Pereira', 'Jper', '${hashTwo}', '${hashTwo}');
+            ('John', 'Doe', 'JohnnyD', '${hashOne}', '${saltOne}', FALSE, TRUE),
+            ('Joao', 'Pereira', 'Jper', '${hashTwo}', '${saltTwo}', FALSE, TRUE),
+            ('Calogero', 'Salvaggio', 'Aquilaruspante', '${hashThree}', '${saltThree}', TRUE, TRUE);
 
 
     CREATE TABLE IF NOT EXISTS messages (

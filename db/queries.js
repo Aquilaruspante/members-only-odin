@@ -20,9 +20,9 @@ exports.messageCreatePost = async function messageCreatePost(body, userId) {
 
 exports.userCreate = async function userCreate(firstName, lastName, username, hash, salt) {
     await pool.query(`
-        INSERT INTO users (firstname, lastname, username, hashedpassword, salt)
+        INSERT INTO users (firstname, lastname, username, hashedpassword, salt, isAdmin, member)
             VALUES
-                ($1, $2, $3, $4, $5);
+                ($1, $2, $3, $4, $5, FALSE, FALSE);
     `, [firstName, lastName, username, hash, salt]);
 };
 
