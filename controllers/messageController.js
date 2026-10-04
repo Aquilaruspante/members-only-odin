@@ -30,6 +30,11 @@ exports.messageCreatePost = async function messageCreatePost(req, res, next) {
     req.session.messages = { type: 'success', message: 'Post created succesfully!' };
     req.session.save(err => {
         if (err) return next(err);
+
+        if (req.session.route === '/new') {
+            delete req.session.route;
+            return res.redirect('/messages/new');
+        }
         res.redirect('/messages');
     });
 };
