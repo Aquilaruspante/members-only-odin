@@ -37,3 +37,14 @@ exports.userGetById = async function userGetById(id) {
 
     return rows[0];
 };
+
+exports.getAllUsers = async function getAllUsers() {
+    const { rows } = await pool.query('SELECT * FROM users;');
+
+    return rows;
+};
+
+exports.updateUser = async function updateUser(userId, value) {
+    console.log(value);
+    await pool.query('UPDATE users SET isadmin = $1 WHERE id=$2', [value, userId]);
+};

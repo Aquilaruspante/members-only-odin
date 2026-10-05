@@ -7,6 +7,7 @@ const env = process.env;
 const pgPool = require('./db/pool');
 const messageRouter = require('./routes/messageRoutes');
 const userRouter = require('./routes/userRoutes');
+const adminRouter = require('./routes/adminRoutes');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.get('/', (req, res, next) => {
 
 app.use('/messages', messageRouter);
 app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 
 /*------------------------------ Start Server -----------------------------------*/
 

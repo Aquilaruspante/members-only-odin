@@ -1,0 +1,23 @@
+<%- include('./templates/header.ejs') %>
+
+<% for (const user of users) { %>
+    <div class="user-card">
+        <p>Username: <%= user.username %></p>
+        <p>First Name<%= user.firstname %></p>
+        <p>Last Name<%= user.lastname %></p>
+        <p>Is a member: <%= user.member %></p>
+        <p>is Admin: <%= user.isadmin %></p>
+        <form action="/admin" method="POST">
+            <input type="hidden" name="userId" value="<%= user.id %>">
+            <% if (user.isadmin) { %>
+                <input type="checkbox" id="admin" name="admin" checked />
+            <% } else { %>
+                <input type="checkbox" id="admin" name="admin" />
+            <% } %>
+            <label for="admin">is admin</label>
+            <button>Apply</button>
+        </form>
+    </div>
+<% } %>
+
+<%- include('./templates/footer.ejs') %>

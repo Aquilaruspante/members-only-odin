@@ -14,7 +14,7 @@
                 <a class="new-message" href="/messages/new">New</a>
                 <% if (locals.user) { %>
                     <a href="/user/logout">Logout</a>
-                    <p class="user-nav"><%= user.username %></p>
+                    <p class="user-nav"><%= user.username.slice(0, 5) %></p>
                 <% } else { %>
                     <a href="/user/login">Login</a>
                     <a href="/user/register">Sign up</a>
