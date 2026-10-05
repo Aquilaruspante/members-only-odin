@@ -2,11 +2,11 @@
 
 <% for (const user of users) { %>
     <div class="user-card">
-        <p>Username: <%= user.username %></p>
-        <p>First Name<%= user.firstname %></p>
-        <p>Last Name<%= user.lastname %></p>
-        <p>Is a member: <%= user.member %></p>
-        <p>is Admin: <%= user.isadmin %></p>
+        <p>Username: <span class="admin-field"><%= user.username %></span></p>
+        <p>First Name: <span class="admin-field"><%= user.firstname %></span></p>
+        <p>Last Name: <span class="admin-field"><%= user.lastname %></span></p>
+        <p>Is a member: <span class="admin-field"><%= user.member %></span></p>
+        <p>is Admin: <span class="admin-field"><%= user.isadmin %></span></p>
         <form action="/admin" method="POST">
             <input type="hidden" name="userId" value="<%= user.id %>">
             <% if (user.isadmin) { %>

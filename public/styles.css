@@ -55,6 +55,7 @@ html {
     --text-color-light: rgb(255, 255, 255);
     --secondary-color: rgb(221, 211, 193);
     --text-color-dark: rgb(1, 1, 24);
+    --body-background: rgb(228, 228, 240);
 }
 
 .error {
@@ -79,6 +80,7 @@ html {
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     height: 100vh;
+    background-color: var(--body-background)
 }
 
 .header-container {
@@ -167,4 +169,89 @@ main {
 
 .card-section {
     margin-bottom: 10px;
+}
+
+.user-card {
+    background-color: var(--secondary-color);
+    margin: auto;
+    width: 600px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 150px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.admin-field {
+    font-weight: 600;
+}
+
+textarea {
+    width: 600px;
+    margin: auto;
+    height: 300px;
+    padding: 10px;
+    resize: none;
+}
+
+form {
+    width: 600px;
+    margin: auto;
+    border: 1px solid var(--primary-color);
+    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+    padding-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--text-color-dark);
+}
+
+.form-element {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-element input {
+    width: 400px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 3px;
+    background-color: var(--secondary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    font-size: 1.1rem;
+    width: 100px;
+    align-self: flex-end;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px rgb(136, 133, 128);
+    color: white;
+    transition: 0.4s;
+}
+
+.message-form {
+    width: 600px;
+    margin: auto;
+    height: 300px;
+    padding: 10px;
+    border: none;
+    padding: 0px;
+    display: block;
 }

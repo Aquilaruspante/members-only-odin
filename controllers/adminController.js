@@ -12,7 +12,6 @@ exports.adminPost = async function adminPost(req, res, next) {
     if (admin) {
         await db.updateUser(userId, true);
     } else {
-        console.log('here');
         await db.updateUser(userId, false);
     };
 

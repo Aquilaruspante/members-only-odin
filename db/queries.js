@@ -45,6 +45,5 @@ exports.getAllUsers = async function getAllUsers() {
 };
 
 exports.updateUser = async function updateUser(userId, value) {
-    console.log(value);
     await pool.query('UPDATE users SET isadmin = $1 WHERE id=$2', [value, userId]);
 };
