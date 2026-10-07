@@ -13,6 +13,11 @@
             <% } %>
             <p class="card-body card-section"><%= message.body %></p>
             <h3 class="card-footer"><%= message.date %></h3>
+            <% if (user && user.isadmin) { %>
+                <form class="delete-form" action="/messages/<%= message.id %>?_method=DELETE" method="POST">
+                    <button>Delete</button>
+                </form>
+            <% } %>
         </div>
     <% } %>
 

@@ -23,4 +23,7 @@
         </header>
     </div>
 <main>
+    <% if (user && !user.isadmin) { %>
+        <a id="membership-link" href="/members">APPLY FOR MEMBERSHIP</a>
+    <% } %>
     

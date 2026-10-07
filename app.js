@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const passport = require('passport');
+const methodOverride = require('method-override');
 const env = process.env;
 const pgPool = require('./db/pool');
 const messageRouter = require('./routes/messageRoutes');
@@ -37,6 +38,7 @@ app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 /*------------------------------- View Engine settings --------------------------*/
 

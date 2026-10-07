@@ -1,3 +1,4 @@
+const pool = require('../db/pool');
 const db = require('../db/queries');
 
 exports.getAllMessages = async function getAllMessages(req, res, next) {
@@ -37,4 +38,10 @@ exports.messageCreatePost = async function messageCreatePost(req, res, next) {
         }
         res.redirect('/messages');
     });
+};
+
+exports.messageDelete = async function messageDelete(req, res, next) {
+    const { id } = req.params;
+    await pool.query('DELETE FROM messages WHERE id=$1', [id]);
+    res.redirect('/messages');
 };

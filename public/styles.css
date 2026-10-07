@@ -255,3 +255,12 @@ button:hover {
     padding: 0px;
     display: block;
 }
+
+.delete-form {
+    width: 100px;
+    height: 25px;
+    padding: 0px;
+    flex-direction: row;
+    justify-content: flex-end;
+    border: none;
+}
