@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const userControllers = require('../controllers/userControllers');
-const { isNotAuth } = require('../middleware');
+const { isNotAuth, isAuth } = require('../middleware');
 const { loginValidator, registerValidator } = require('../validator');
 
 const router = new Router();
@@ -13,7 +13,7 @@ router.post('/register', isNotAuth, registerValidator, userControllers.userCreat
 
 /*--------------------------------------- Authenticate User -------------------------*/
 
-router.get('/logout', userControllers.userLogout);
+router.get('/logout', isAuth, userControllers.userLogout);
 
 router.get('/login', isNotAuth, userControllers.userLoginGet);
 

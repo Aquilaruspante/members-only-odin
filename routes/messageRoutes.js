@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const messageControllers = require('../controllers/messageController');
-const { isAuth } = require('../middleware');
+const { isAuth, isAdmin } = require('../middleware');
 const { messageValidator } = require('../validator');
 
 const router = new Router({ mergeParams: true });
@@ -11,6 +11,6 @@ router.get('/new', isAuth, messageControllers.messageCreateGet);
 
 router.post('/new', isAuth, messageValidator, messageControllers.messageCreatePost);
 
-router.delete('/:id', messageControllers.messageDelete);
+router.delete('/:id', isAuth, isAdmin,  messageControllers.messageDelete);
 
 module.exports = router;
