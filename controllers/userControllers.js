@@ -2,6 +2,7 @@ const crypto = require('node:crypto');
 const db = require('../db/queries');
 const { genPassword } = require('../lib/passwordUtils');
 const passport = require('passport');
+const ExpressError = require('../expressError');
 
 function authenticateAndRedirect(req, res, next, route) {
     if (!route) route = '/';
@@ -64,10 +65,16 @@ exports.userCreate = async function userCreate(req, res, next) {
 };
 
 exports.userLogout = function userLogout (req, res) {
-    req.logout((err) => {
-        if (err) return next(err);
-        res.redirect('/messages');
-    });
+    try {
+        req.logout((err) => {
+            if (err) return next(err);
+            res.redirect('/messages');
+        });
+    } catch (err) {
+        console.log(err);
+        const error = new ExpressError();
+        next(error);
+    };
 };
 
 exports.userLoginGet = function userLoginGet (req, res) {
@@ -78,5 +85,11 @@ exports.userLoginGet = function userLoginGet (req, res) {
 };
 
 exports.userLoginPost = function userLoginPost (req, res, next) {
-    authenticateAndRedirect(req, res, next, req.session.route);
+    try {
+        authenticateAndRedirect(req, res, next, req.session.route);
+    } catch (err) {
+        console.log(err);
+        const error = new ExpressError();
+        next(error);
+    };
 };

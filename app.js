@@ -64,6 +64,13 @@ app.all('/{*splat}', (req, res) => {
     res.status(404).render('error', { status, message: 'Page not found!' });
 });
 
+app.use((err, req, res, next) => {
+    console.log(err);
+
+    const { status, message } = err;
+    res.render('error', { status, message });
+});
+
 /*------------------------------ Start Server -----------------------------------*/
 
 const port = env.PORT || 3000;
