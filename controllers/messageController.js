@@ -19,7 +19,11 @@ exports.getAllMessages = async function getAllMessages(req, res, next) {
 
 exports.messageCreateGet = function messageCreateGet(req, res, next) {
     const user = req.user;
-    res.render('newMessage', { user });
+    
+    const sessionMessages = req.session.messages;
+    delete req.session.messages;
+
+    res.render('newMessage', { user, sessionMessages });
 };
 
 exports.messageCreatePost = async function messageCreatePost(req, res, next) {

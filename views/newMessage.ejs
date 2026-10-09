@@ -1,5 +1,8 @@
 <%- include('./templates/header.ejs') %>
 
+<% if (sessionMessages) { %>
+    <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
+<% } %>
 <form class="message-form" action="/messages/new" method="POST">
     <textarea name="body" placeholder="Write your message here..."></textarea>
     <button>Submit</button>

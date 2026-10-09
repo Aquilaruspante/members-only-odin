@@ -15,7 +15,6 @@ function authenticateAndRedirect(req, res, next, route) {
                     return res.redirect('/user/login');
                 });
             } catch(err) {
-                console.log('this is the error')
                 next(err);
             }
             
@@ -72,6 +71,7 @@ exports.userLogout = function userLogout (req, res) {
 };
 
 exports.userLoginGet = function userLoginGet (req, res) {
+    console.log('in login', req.session)
     const sessionMessages = req.session.messages;
     delete req.session.messages;
     res.render('login', { sessionMessages });
