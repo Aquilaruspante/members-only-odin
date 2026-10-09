@@ -47,3 +47,11 @@ exports.getAllUsers = async function getAllUsers() {
 exports.updateUser = async function updateUser(userId, value) {
     await pool.query('UPDATE users SET isadmin = $1 WHERE id=$2', [value, userId]);
 };
+
+exports.updateMemberStatus = async function updateMemberStatus(userId) {
+    await pool.query('UPDATE users SET member=TRUE WHERE id=$1', [userId]);
+};
+
+exports.memberPost = async function memberPost(userId) {
+    await pool.query('UPDATE users SET member=TRUE WHERE id=$1', [userId]);
+};

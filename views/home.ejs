@@ -4,6 +4,11 @@
     <% if (sessionMessages) { %>
         <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
     <% } %>
+    <% if (user && !user.member) { %>
+        <form id="link-container" action="/members">
+            <button id="membership-link">APPLY FOR MEMBERSHIP</button>
+        </form>
+    <% } %>
     <% for (const message of messages) { %>
         <div class="message-card">
             <% if (user && user.member) { %>

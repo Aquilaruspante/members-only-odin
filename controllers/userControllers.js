@@ -48,7 +48,10 @@ exports.userCreate = async function userCreate(req, res, next) {
         req.login(user, (err) => {
             if (err) return next(err);
             req.session.messages = { type: 'success', message: 'User created succesfully!'};
-            return res.redirect('/messages');
+            req.session.save(err => {
+                if (err) return next(err);
+                return res.redirect('/messages');
+            });
         });
         
     } catch (err) {
