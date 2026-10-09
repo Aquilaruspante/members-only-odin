@@ -5,7 +5,10 @@
 <% } %>
 <form action="/members" method="POST">
     <h3>Roses are red, violets are...</h3>
-    <input type="text" name="riddle">
+    <div class="riddle-section">
+        <input type="text" name="riddle">
+        <button>Apply</button>
+    </div>
 </form>
 
 <%- include('./templates/footer.ejs') %>

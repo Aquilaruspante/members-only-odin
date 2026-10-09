@@ -3,6 +3,7 @@ const db = require('../db/queries');
 const { genPassword } = require('../lib/passwordUtils');
 const passport = require('passport');
 const ExpressError = require('../expressError');
+const { matchedData, validationResult } = require('express-validator');
 
 function authenticateAndRedirect(req, res, next, route) {
     if (!route) route = '/';
@@ -32,36 +33,48 @@ function authenticateAndRedirect(req, res, next, route) {
 };
 
 exports.userCreateGet = function userCreateGet (req, res, next) {
+    console.log(req.session);
     const sessionMessages = req.session.messages;
     delete req.session.messages;
-
+    console.log('messages', sessionMessages);
     res.render('register', { sessionMessages });
 };
 
 exports.userCreate = async function userCreate(req, res, next) {
-    try {
-        const { firstname, lastname, username, password } = req.body;
-        const { salt, genHash } = genPassword(password);
+    const result = validationResult(req);
 
-        await db.userCreate(firstname, lastname, username, genHash, salt);
-        const user = await db.userGetByUsername(username);
-        req.login(user, (err) => {
-            if (err) return next(err);
-            req.session.messages = { type: 'success', message: 'User created succesfully!'};
-            req.session.save(err => {
+    if (result.isEmpty()) {
+        try {
+            const { firstname, lastname, username, password } = matchedData(req);
+            const { salt, genHash } = genPassword(password);
+
+            await db.userCreate(firstname, lastname, username, genHash, salt);
+            const user = await db.userGetByUsername(username);
+            req.login(user, (err) => {
                 if (err) return next(err);
-                return res.redirect('/messages');
+                req.session.messages = { type: 'success', message: 'User created succesfully!'};
+                req.session.save(err => {
+                    if (err) return next(err);
+                    return res.redirect('/messages');
+                });
             });
-        });
-        
-    } catch (err) {
-        console.log(err);
-        req.session.messages = { type: 'error', message: 'Oops! Something went wrong!'};
-        req.session.save((err) => {
-            if (err) return next(err);
+        } catch (err) {
+            console.log('error', err);
+            req.session.messages = { type: 'error', message: 'Oops! Something went wrong cane!'};
+            req.session.save((err) => {
+                if (err) return next(err);
+                res.redirect('/user/register');
+            });
+        };
+    } else {
+        const errors = result.array();
+        console.log('errors', errors)
+        req.session.messages = { type: 'error', message: errors[0].msg };
+        req.session.save(err => {
+            if (err) returnnext(err);
             res.redirect('/user/register');
         });
-    };  
+    };
 };
 
 exports.userLogout = function userLogout (req, res) {
@@ -85,11 +98,24 @@ exports.userLoginGet = function userLoginGet (req, res) {
 };
 
 exports.userLoginPost = function userLoginPost (req, res, next) {
-    try {
-        authenticateAndRedirect(req, res, next, req.session.route);
-    } catch (err) {
-        console.log(err);
-        const error = new ExpressError();
-        next(error);
+    const result = validationResult(req);
+
+    if (result.isEmpty()) {
+        try {
+            authenticateAndRedirect(req, res, next, req.session.route);
+        } catch (err) {
+            console.log(err);
+            const error = new ExpressError();
+            next(error);
+        };
+    } else {
+        const errors = result.array();
+        console.log(errors);
+        req.session.messages = { type: 'error', message: `${errors[0].msg}`};
+        req.session.save(err => {
+            if (err) return next(err);
+            res.redirect('/user/login');
+        })
     };
 };
+    

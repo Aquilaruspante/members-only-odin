@@ -1,6 +1,7 @@
 const pool = require('../db/pool');
 const db = require('../db/queries');
 const ExpressError = require('../expressError');
+const { validationResult, matchedData } = require('express-validator');
 
 exports.getAllMessages = async function getAllMessages(req, res, next) {
     try {
@@ -30,27 +31,37 @@ exports.messageCreateGet = function messageCreateGet(req, res, next) {
 };
 
 exports.messageCreatePost = async function messageCreatePost(req, res, next) {
-    try {
-        const { body } = req.body;
-        const userId = req.user.id;
+    const result = validationResult(req);
 
-        await db.messageCreatePost(body, userId);
+    if (result.isEmpty()) {
+        try {
+            const { body } = matchedData(req);
+            const userId = req.user.id;
 
-        req.session.messages = { type: 'success', message: 'Post created succesfully!' };
+            await db.messageCreatePost(body, userId);
+
+            req.session.messages = { type: 'success', message: 'Post created succesfully!' };
+            req.session.save(err => {
+                if (err) return next(err);
+
+                if (req.session.route === '/new') {
+                    delete req.session.route;
+                    return res.redirect('/messages/new');
+                }
+                res.redirect('/messages');
+            });
+        } catch (err) {
+            console.log(err);
+            const error = new ExpressError();
+        }
+    } else {
+        const errors = result.array();
+        req.session.messages = { type: 'error', message: errors[0].msg };
         req.session.save(err => {
             if (err) return next(err);
-
-            if (req.session.route === '/new') {
-                delete req.session.route;
-                return res.redirect('/messages/new');
-            }
-            res.redirect('/messages');
+            res.redirect('/messages/new');
         });
-    } catch (err) {
-        console.log(err);
-        const error = new ExpressError();
-    }
-
+    };
 };
 
 exports.messageDelete = async function messageDelete(req, res, next) {

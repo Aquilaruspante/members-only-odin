@@ -312,3 +312,12 @@ button:hover {
     margin: auto;
     margin-top: 20px;
 }
+
+.riddle-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.riddle-section input {
+    width: 75%;
+}

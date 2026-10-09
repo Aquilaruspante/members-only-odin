@@ -21,7 +21,7 @@ exports.memberPost = async function(req, res, next) {
                 res.redirect('/messages');
             });
         } else {
-            req.session.messages = { type: 'failure', message: 'Try again!' };
+            req.session.messages = { type: 'error', message: 'Try again!' };
             req.session.save(err => {
                 if (err) return next(err);
                 res.redirect('members');
