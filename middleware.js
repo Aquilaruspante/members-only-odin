@@ -14,3 +14,8 @@ exports.isAdmin = function isAdmin(req, res, next) {
     if (req.user.isadmin) return next();
     res.redirect('/messages');
 };
+
+exports.exposeUser = function exposeUser(req, res, next) {
+    res.locals.user = req.user;
+    next();
+};

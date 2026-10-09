@@ -4,21 +4,21 @@
     <% if (sessionMessages) { %>
         <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
     <% } %>
-    <% if (user && !user.member) { %>
+    <% if (locals.user && !locals.user.member) { %>
         <form id="link-container" action="/members">
             <button id="membership-link">APPLY FOR MEMBERSHIP</button>
         </form>
     <% } %>
     <% for (const message of messages) { %>
         <div class="message-card">
-            <% if (user && user.member) { %>
+            <% if (locals.user && locals.user.member) { %>
                 <h2 class="card-owner card-section">From <%= message.user.username %>:</h2>
             <% } else { %>
                 <h2 class="card-owner card-section">From <span class="error">CLASSIFIED:</span></h2>
             <% } %>
             <p class="card-body card-section"><%= message.body %></p>
             <h3 class="card-footer"><%= message.date %></h3>
-            <% if (user && user.isadmin) { %>
+            <% if (locals.user && locals.user.isadmin) { %>
                 <form class="delete-form" action="/messages/<%= message.id %>?_method=DELETE" method="POST">
                     <button>Delete</button>
                 </form>

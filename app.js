@@ -10,6 +10,7 @@ const messageRouter = require('./routes/messageRoutes');
 const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/adminRoutes');
 const memberRouter = require('./routes/memberRoutes');
+const { exposeUser } = require('./middleware');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(exposeUser);
 
 /*------------------------------- View Engine settings --------------------------*/
 
@@ -56,6 +58,11 @@ app.use('/messages', messageRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/members', memberRouter);
+
+app.all('/{*splat}', (req, res) => {
+    const status = '404';
+    res.status(404).render('error', { status, message: 'Page not found!' });
+});
 
 /*------------------------------ Start Server -----------------------------------*/
 

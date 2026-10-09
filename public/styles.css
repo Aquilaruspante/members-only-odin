@@ -298,3 +298,17 @@ button:hover {
     background-color: var(--text-color-light);
     transition: 0.6s;
 }
+
+#error-title {
+    text-align: center;
+    font-size: 3rem;
+    margin: auto;
+    margin-top: 100px;
+}
+
+#error-status {
+    text-align: center;
+    font-size: 3rem;
+    margin: auto;
+    margin-top: 20px;
+}

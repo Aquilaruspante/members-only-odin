@@ -7,23 +7,19 @@ exports.getAllMessages = async function getAllMessages(req, res, next) {
         const user = await db.userGetById(message.user_id);
         message.user = user;
     };
-
-    const user = req.user;
     
     const sessionMessages = req.session.messages;
 
     delete req.session.messages;
 
-    res.render('home', { messages, user, sessionMessages });
+    res.render('home', { messages, sessionMessages });
 };
 
 exports.messageCreateGet = function messageCreateGet(req, res, next) {
-    const user = req.user;
-    
     const sessionMessages = req.session.messages;
     delete req.session.messages;
 
-    res.render('newMessage', { user, sessionMessages });
+    res.render('newMessage', { sessionMessages });
 };
 
 exports.messageCreatePost = async function messageCreatePost(req, res, next) {
