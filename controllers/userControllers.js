@@ -10,11 +10,14 @@ function authenticateAndRedirect(req, res, next, route) {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
         if (!user) {
+            console.log('here');
             try {
                 req.session.messages = { type: 'error', message: 'Wrong credentials!' };
-                req.session.save(err => {
+                console.log(req.session);
+                return req.session.save(err => {
+                    console.log('2nd', req.session);
                     if (err) return next(err);
-                    return res.redirect('/user/login');
+                    res.redirect('/user/login');
                 });
             } catch(err) {
                 next(err);
@@ -24,7 +27,7 @@ function authenticateAndRedirect(req, res, next, route) {
         req.login(user, err => {
             if (err) return next(err);
             req.session.messages = { type: 'success', message: `Welcome ${user.username}` };
-            req.session.save(err => {
+            return req.session.save(err => {
                 if (err) return next(err);  
                 res.redirect(`/messages${route}`);
             });
@@ -33,7 +36,6 @@ function authenticateAndRedirect(req, res, next, route) {
 };
 
 exports.userCreateGet = function userCreateGet (req, res, next) {
-    console.log(req.session);
     const sessionMessages = req.session.messages;
     delete req.session.messages;
     console.log('messages', sessionMessages);
@@ -53,7 +55,7 @@ exports.userCreate = async function userCreate(req, res, next) {
             req.login(user, (err) => {
                 if (err) return next(err);
                 req.session.messages = { type: 'success', message: 'User created succesfully!'};
-                req.session.save(err => {
+                return req.session.save(err => {
                     if (err) return next(err);
                     return res.redirect('/messages');
                 });
@@ -61,7 +63,7 @@ exports.userCreate = async function userCreate(req, res, next) {
         } catch (err) {
             console.log('error', err);
             req.session.messages = { type: 'error', message: 'Oops! Something went wrong cane!'};
-            req.session.save((err) => {
+            return req.session.save((err) => {
                 if (err) return next(err);
                 res.redirect('/user/register');
             });
@@ -70,7 +72,7 @@ exports.userCreate = async function userCreate(req, res, next) {
         const errors = result.array();
         console.log('errors', errors)
         req.session.messages = { type: 'error', message: errors[0].msg };
-        req.session.save(err => {
+        return req.session.save(err => {
             if (err) returnnext(err);
             res.redirect('/user/register');
         });
@@ -91,7 +93,6 @@ exports.userLogout = function userLogout (req, res) {
 };
 
 exports.userLoginGet = function userLoginGet (req, res) {
-    console.log('in login', req.session)
     const sessionMessages = req.session.messages;
     delete req.session.messages;
     res.render('login', { sessionMessages });
@@ -112,7 +113,7 @@ exports.userLoginPost = function userLoginPost (req, res, next) {
         const errors = result.array();
         console.log(errors);
         req.session.messages = { type: 'error', message: `${errors[0].msg}`};
-        req.session.save(err => {
+        return req.session.save(err => {
             if (err) return next(err);
             res.redirect('/user/login');
         })
