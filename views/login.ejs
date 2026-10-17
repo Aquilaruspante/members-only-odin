@@ -3,17 +3,19 @@
 <% if (sessionMessages) { %>
     <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
 <% } %>
-<form action="/user/login" method="POST">
+<form action="/user/login" method="POST" autocomplete="off" >
     <div class="form-element">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" required>
     </div>
     <div class="form-element">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" required>
     </div>
-    <button>Login</button>
+    <div class="form-bottom-line">
+        <a href="/messages">Back</a>
+        <button>Login</button>
+    </div>
 </form>
-<a href="/messages">Back</a>
 
 <%- include('./templates/footer.ejs') %>

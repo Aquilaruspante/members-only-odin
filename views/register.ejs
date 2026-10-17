@@ -3,29 +3,32 @@
 <% if (sessionMessages) { %>
     <p class="<%= sessionMessages.type %> flash-message"><%= sessionMessages.message %></p>
 <% } %>
-<form action="/user/register" method="POST">
+<form action="/user/register" method="POST" autocomplete="off">
     <div class="form-element">
         <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname">
+        <input type="text" id="firstname" name="firstname" minlength="3" maxlength="15" required>
     </div>
     <div class="form-element">
         <label for="last">Last Name:</label>
-        <input type="text" id="lastname" name="lastname">
+        <input type="text" id="lastname" name="lastname" minlength="3" maxlength="15" required>
     </div>
     <div class="form-element">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" minlength="3" maxlength="15" required>
     </div>
     <div class="form-element">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" minlength="8" required>
     </div>
-    <div class="form-element">
+    <div class="form-element last-element">
         <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password">
-    </div>    
-    <button>Register</button>
+        <input type="password" id="confirm-password" name="confirm-password" minlength="8" required>
+    </div> 
+    <div class="form-bottom-line">
+        <a href="/messages">Back</a>
+        <button>Register</button>
+    </div>
 </form>
-<a href="/messages">Back</a>
+<script src="/frontValidation.js"></script>
 
 <%- include('./templates/footer.ejs') %>

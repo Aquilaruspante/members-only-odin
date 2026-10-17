@@ -68,6 +68,10 @@ html {
     color: green;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .flash-message {
     width: 100%;
     position: absolute;
@@ -198,7 +202,7 @@ textarea {
 }
 
 form {
-    width: 600px;
+    width: 450px;
     margin: auto;
     border: 1px solid var(--primary-color);
     box-sizing: border-box;
@@ -215,17 +219,30 @@ form {
 
 .form-element {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
     justify-content: space-between;
 }
 
+
 .form-element input {
-    width: 400px;
+    width: 95%;
     border-radius: 5px;
     outline: none;
     border: none;
     box-sizing: border-box;
     padding: 3px;
     background-color: var(--secondary-color);
+}
+
+.form-bottom-line {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-bottom-line a {
+    color: var(--primary-color);
 }
 
 button {
@@ -236,7 +253,6 @@ button {
     height: 25px;
     font-size: 1.1rem;
     width: 100px;
-    align-self: flex-end;
 }
 
 button:hover {

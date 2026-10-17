@@ -38,7 +38,6 @@ function authenticateAndRedirect(req, res, next, route) {
 exports.userCreateGet = function userCreateGet (req, res, next) {
     const sessionMessages = req.session.messages;
     delete req.session.messages;
-    console.log('messages', sessionMessages);
     res.render('register', { sessionMessages });
 };
 
@@ -70,7 +69,6 @@ exports.userCreate = async function userCreate(req, res, next) {
         };
     } else {
         const errors = result.array();
-        console.log('errors', errors)
         req.session.messages = { type: 'error', message: errors[0].msg };
         return req.session.save(err => {
             if (err) returnnext(err);
@@ -111,7 +109,6 @@ exports.userLoginPost = function userLoginPost (req, res, next) {
         };
     } else {
         const errors = result.array();
-        console.log(errors);
         req.session.messages = { type: 'error', message: `${errors[0].msg}`};
         return req.session.save(err => {
             if (err) return next(err);
