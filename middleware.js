@@ -11,7 +11,7 @@ exports.isNotAuth = function isNotAuth(req, res, next) {
 };
 
 exports.isAdmin = function isAdmin(req, res, next) {
-    if (req.user.isadmin) return next();
+    if (req.user && req.user.isadmin) return next();
     res.redirect('/messages');
 };
 
