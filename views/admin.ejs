@@ -7,7 +7,7 @@
         <p>Last Name: <span class="admin-field"><%= user.lastname %></span></p>
         <p>Is a member: <span class="admin-field"><%= user.member %></span></p>
         <p>is Admin: <span class="admin-field"><%= user.isadmin %></span></p>
-        <form action="/admin" method="POST">
+        <form id="admin-checkbox" action="/admin" method="POST">
             <input type="hidden" name="userId" value="<%= user.id %>">
             <% if (user.isadmin) { %>
                 <input type="checkbox" id="admin" name="admin" checked />

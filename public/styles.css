@@ -337,3 +337,19 @@ button:hover {
 .riddle-section input {
     width: 75%;
 }
+
+#admin-checkbox {
+    width: 0px;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+    padding: 0px;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0px;
+    padding-bottom: 0px;
+    font-size: 1.2rem;
+    color: var(--text-color-dark);
+}
