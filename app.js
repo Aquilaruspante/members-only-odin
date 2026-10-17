@@ -22,7 +22,7 @@ app.use(session({
         tableName: 'user_sessions',
         createTableIfMissing: true
     }),
-    secret: 'not a good secret',
+    secret: `${process.env.EXPRESSSECRET}`,
     resave: false,
     saveUninitialized: true,
     name: 'ci',

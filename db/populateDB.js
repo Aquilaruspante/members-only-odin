@@ -11,9 +11,6 @@ const saltThree = crypto.randomBytes(32).toString('hex');
 const hashThree = crypto.pbkdf2Sync(process.env.PASSWORD_THREE, saltThree, 10000, 64, 'sha512').toString('hex');
 
 const SQL = `
-    DROP TABLE messages;
-    DROP TABLE users;
-
     CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         firstname VARCHAR (255) NOT NULL CHECK (TRIM(firstname) <> ''),
