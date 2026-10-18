@@ -13,7 +13,7 @@ exports.memberPost = async function(req, res, next) {
         const { riddle } = req.body;
         const user = req.user;
 
-        if (riddle.toLowerCase() === 'blue') {
+        if (riddle.toLowerCase().trim() === 'blue') {
             await db.updateMemberStatus(user.id);
             req.session.messages = { type: 'success', message: 'Welcome into the Inner circle!' };
             req.session.save(err => {

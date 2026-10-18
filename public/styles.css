@@ -171,13 +171,26 @@ main {
     margin: auto;   
     border: 2px solid var(--secondary-color);
     border-radius: 5px;
-    padding: 10px;
+    box-sizing: border-box;
+    padding: 20px;
     margin-bottom: 20px;
     background-color: var(--secondary-color);
 }
 
+.message-card p {
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.message-card h3 {
+    text-align: right;
+}
+
 .card-section {
     margin-bottom: 10px;
+    box-sizing: border-box;
+    padding: 2px;
 }
 
 .user-card {
@@ -192,6 +205,10 @@ main {
     border-radius: 5px;
     box-sizing: border-box;
     padding: 10px;
+}
+
+.author {
+    font-weight: 700;
 }
 
 .admin-field {
