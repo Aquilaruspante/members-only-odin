@@ -39,8 +39,22 @@ const SQL = `
 
     INSERT INTO messages (body, date, user_id)
         VALUES
-            ('Hi guys', '${new Date(Date.now()).toString()}', 1),
-            ('We are the inner circle', '${new Date(Date.now()).toString()}', 2);
+            ('Hi guys', '${new Date().toLocaleString({
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}', 1),
+            ('We are the inner circle', '${new Date().toLocaleString({
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}', 2);
 `;
 
 async function main() {

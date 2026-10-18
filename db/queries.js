@@ -9,11 +9,21 @@ exports.getAllMessages = async function getAllMessages() {
 };
 
 exports.messageCreatePost = async function messageCreatePost(body, userId) {
+    const date = new Date();
+    const formatted = date.toLocaleString('en-GB', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    })
+
     await pool.query(`
         INSERT INTO messages (body, date, user_id)
             VALUES
                 ($1, $2, $3);
-    `, [body, new Date(Date.now()).toString(), userId]);
+    `, [body, formatted, userId]);
 };
 
 /*-------------------------- Users ------------------------------*/
