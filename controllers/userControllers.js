@@ -10,12 +10,9 @@ function authenticateAndRedirect(req, res, next, route) {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
         if (!user) {
-            console.log('here');
             try {
                 req.session.messages = { type: 'error', message: 'Wrong credentials!' };
-                console.log(req.session);
                 return req.session.save(err => {
-                    console.log('2nd', req.session);
                     if (err) return next(err);
                     res.redirect('/user/login');
                 });
