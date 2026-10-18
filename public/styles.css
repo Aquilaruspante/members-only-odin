@@ -179,12 +179,13 @@ main {
 
 .message-card p {
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 
 .message-card h3 {
     text-align: right;
+    margin-top: 25px;
 }
 
 .card-section {
