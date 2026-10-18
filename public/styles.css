@@ -58,6 +58,10 @@ html {
     --body-background: rgb(228, 228, 240);
 }
 
+body {
+    position: relative;
+}
+
 .error {
     background-color: rgb(226, 192, 192);
     color: red;
@@ -354,6 +358,48 @@ button:hover {
     color: var(--text-color-dark);
 }
 
+#menu-button {
+    display: none;
+}
+
+#menu-button:hover {
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+}
+
+#side-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 30px;
+    z-index: 1;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    gap: 20px;
+    padding-top: 50px;
+    left: 0px;
+    transform: translate(-100%);
+    transition: transform 0.7s ease-in-out;
+}
+
+#side-menu.menu-visible {
+    transform: translate(0%);
+}
+
+#side-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+#close-icon {
+    display: flex;
+    justify-content: end;
+}
+
 @media (max-width: 650px) {
     .header-container {
         width: 100%;
@@ -370,6 +416,14 @@ button:hover {
     main {
         width: 90%;
     }
+
+    #menu-button {
+        display: flow;
+    }
+
+    nav {
+        display: none;
+    };
 }
 
 @media (max-width: 1800px) {
