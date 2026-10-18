@@ -165,9 +165,10 @@ main {
     height: calc(100% - 50px);
 }
 
+
 .message-card {
     max-width: 600px;
-    margin: auto;
+    margin: auto;   
     border: 2px solid var(--secondary-color);
     border-radius: 5px;
     padding: 10px;
@@ -182,7 +183,7 @@ main {
 .user-card {
     background-color: var(--secondary-color);
     margin: auto;
-    width: 600px;
+    max-width: 600px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -198,7 +199,7 @@ main {
 }
 
 textarea {
-    width: 600px;
+    width: 100%;
     margin: auto;
     height: 300px;
     padding: 10px;
@@ -267,7 +268,7 @@ button:hover {
 }
 
 .message-form {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
     height: 300px;
     padding: 10px;
@@ -286,7 +287,7 @@ button:hover {
 }
 
 #link-container {
-    width: 600px;
+    max-width: 600px;
     height: 50px;
     margin: auto;
     padding: 0px;
