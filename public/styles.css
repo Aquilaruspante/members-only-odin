@@ -206,7 +206,7 @@ textarea {
 }
 
 form {
-    width: 450px;
+    max-width: 450px;
     margin: auto;
     border: 1px solid var(--primary-color);
     box-sizing: border-box;
